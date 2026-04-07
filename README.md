@@ -105,31 +105,44 @@ Para que el caos tenga una mínima supervisión.
 Van a tocar archivos distintos y después el mismo archivo para practicar conflictos y merge.
 
 ---
+Github lo podes manejar desde dos lugares. Uno creado hace recientemente poco que es su aplicacion llamada GitHub Desktop LA CUAL NO VAMOS A USAR HASTA QUE USTEDES NO ENTIENDAN GIT ASI NO SON UNO NENES IA. Y la que vamos a ver nosotros que es basicamente manejar Git desde la consola.
+Pq es util saber manejarlo desde la consola? qsy flaco preguntale al chat.
 
-# Instalación
+Para arrancar hay que instalar git en nuestra terminal de linux y setear el ssh (vimos en redes que es un ssh btw, espero les resulte interesante implementarlo. Omar no estaba gaga del todo al final de cuentas).
 
-## Windows
+Arrancamos instalando como ya sabemos (creo que ya lo hicieron pero no pasa nada)
 
-Instalá:
+`sudo apt install git`
+Sencillo. Logro desbloqueado: instalaste git
 
-* Git
-* una cuenta de GitHub
-* ganas de no mandar 48 archivos `.exe` al repo
+Ahora hay que setear la ssh. Que es ssh: video de [que es ssh en 27 segundos:]( https://www.youtube.com/watch?v=GBIIQ0kP15E)
 
-Después abrí **Git Bash** o la terminal de VS Code.
-
-## Verificar instalación
-
-```bash
-git --version
+Arrancamos con:
 ```
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu_email@ejemplo.com"
+```
+Generas una clave SSH asociada a tu correo, para esto es importante saber en donde estamos parados pq va a generar un archivo:
+`ssh-keygen -t ed25519 -C "tu_email@ejemplo.com"`
+Le dan enter hasta que este, no pongan ninguna contrasena, simplemente enter.
 
-Si responde una versión, joya.
-Si no responde, arrancamos mal pero se puede remontar.
+Ahora levantamos el agente (no pregunten):
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+Y la parte donde los que tienen windows wsl no se si les va a funcionar:
+Copian su clave ssh:
+`cat ~/.ssh/id_ed25519.pub`
+Van a su cuenta de github -> Settings -> SSH and GPG keys -> New SSH key.
+Pegan la clave donde dice "key" y le ponen un nombre que quieran.
+
+Prueban la conexion: `ssh -T git@github.com` y le van a tener que escribir 'yes' al ser la primera vez.
+
+LISTO, INSTALARON Y CONFIGURARON GIT, LOS FELICITO.
 
 ---
-
-# Primeros conceptos sin humo
+# Primeros conceptos posta, agarrate catalina
 
 ## Repositorio
 
@@ -197,30 +210,27 @@ Sí. `git status` es tu pastor. Nada te faltará.
 
 Tener el repo en tu compu.
 
-```bash
-git clone URL_DEL_REPO
-```
-
-Después:
-
+Bien, arrancamos basicon basicon.
+Que es clonar? Bascimanete es
+> Traeme todo lo que esta en GitHub a mi compu
+No solamente trae archivos sino informacion acerca del repositorio y demas boludeces.
+Para clonar, lo que haces es copiar la URL del repositorio (o apretar el boton verde y copiar ahi) y en tu consola, parado donde queres que se haga la CARPETA del repositorio ejecutas
+```git clone URL_DEL_REPO```. 
+A partir de ahi podes abrir la carpeta (cd) y revisar que todo este bien. Como lo reviso:
 ```bash
 cd github-para-petes
+git status
 ```
-
-## Qué pasó acá
+### Qué pasó acá
 
 * `clone` copia el repo remoto a tu máquina
 * `cd` entra a la carpeta
 
-## Checkpoint
+Si todo salio bien te tendria que decir algo tipo *On branch main. Nothing to commit, working tree clean*. Basicamente te dice literalmente el estado del repositorio en tu pc.
 
-Corré:
+ESTO ES EL PASO INICIAL. Ahora esa carpeta tiene un archivo oculto llamado .git, en base a eso ya no necesitas clonar sino hacer requests al servidor. 
 
-```bash
-git status
-```
-
-Si dice que estás en una branch y que no hay cambios, todo bien.
+BIEN, TERMINASTE EL PRIMER COSO, TODAVIA NO ESTOY ORGULLOSO DE VOS PERO PODES SEGUIR PARA DARME UNA ALEGRIA.
 
 ---
 
@@ -231,7 +241,7 @@ Editá un archivo, por ejemplo `presentaciones/tu_nombre.md`.
 Poné algo así:
 
 ```md
-# Hola, soy Gonza
+# Hola, soy * nombre del inoperante *
 
 Vine a aprender Git para dejar de mandar archivos_final_definitivo2_ahora_si.zip
 ```
@@ -253,24 +263,20 @@ Vas a ver que Git detectó cambios.
 ```bash
 git add presentaciones/tu_nombre.md
 ```
-
+Con el add basicamente haces eso, agregar. Le decis a git: "*yo a esto que toquetee lo quiero subir al repositorio*"
+add agrega CAMBIOS, no archivos. Es decir, si vos modificas un archivo, tenes que hacer un add.
+Los add se hacen siempre al final, no creas un archivo, le haces un add y despues lo modificas.
+El `git add .` agrega todo los cambios que esten dentro  de la carpeta. Es util? si. Es recomendado? no. Porque te agrega archivos de mas, como por ejemplo los codigos compilados mas los codicos .c
 ## Paso 2: guardar cambios
 
 ```bash
-git commit -m "Agrega presentación de Gonza"
+git commit -m "Agrega presentación de nombre_del_inoperante"
 ```
 
-## Qué significa
+### Qué significa
 
 * `add` pone cambios en el área de preparación
 * `commit` guarda esa versión en el historial
-
-## Analogía falopa pero útil
-
-* archivo editado = estás cocinando
-* `git add` = serviste el plato
-* `git commit` = le sacaste foto para Instagram
-
 ---
 
 # Cómo escribir commits que no den vergüenza
@@ -281,7 +287,7 @@ git commit -m "Agrega presentación de Gonza"
 * `Corrige typo en README`
 * `Suma ejercicio de ramas`
 
-## Commits horribles
+## Malos commits
 
 * `cosas`
 * `arreglo`
@@ -291,6 +297,7 @@ git commit -m "Agrega presentación de Gonza"
 
 Ese último es emocionalmente válido, pero técnicamente pobre.
 
+No hace falta que sean tan formales aca, pero si la idea es que logre explicar bien que carajos agregaron y bla bla. CREO que el commit lleva un nombre y una descripcion, con el nombre alcanza.
 ---
 
 # Misión 4: Subir cambios
@@ -325,9 +332,14 @@ git push
 
 No grites. Es normal. Está todo hablado más abajo.
 
+### Temita particular
+Nosotros utilizamos el repo de protocolos (el del profe) pero simplemente para verlo, no para subir cosas. El tema es que nosotros igual modificamos las cosas del repo y agregamos nuestros archivos. Es por eso que al pullear es muy muy probable que te tire algun error. Lo que nosotros usamos en este caso es: `git pull --rebase --autostash`.
+- autostash: guarda automaticamente en un stash todos los cambios locales nuestros para despues sacarlos.
+- sobreescribe todos los cambios sobre lo que nosotros hagamos hecho (asi que guarda si modifican directamente el archivo del profe, la idea es que tengan sus copias)
+
 ---
 
-# Misión 5: Branches
+# Misión 5: Branches aka ramas
 
 ## Crear una branch
 
@@ -351,7 +363,7 @@ git switch main
 
 ## Idea clave
 
-Trabajás en una rama para no romper la principal.
+Trabajás en una rama para no romper la principal y despues si no hay superposiciones la fusionas con la principal.
 
 Es como hacer experimentos en un laboratorio y no en el comedor de tu casa.
 
@@ -366,11 +378,12 @@ Usalas cuando:
 * no querés romper `main`
 * querés fingir profesionalismo industrial
 
-No hace falta crear una branch para cambiar una coma en un archivo si están aprendiendo entre amigos, pero conviene practicar igual.
+No hace falta crear una branch para cambiar una coma en un archivo o incluso por nada hace falta usar branches, pero conviene practicar igual.
 
 ---
 
-# Misión 6: Pull request explicado sin humo corporativo
+# Misión 6: Pull request explicado.
+Aclaracion: jamas use esto pq siempre trabaje solo asi que estamos en bolas todos. No se ni donde se hacen ni como se hacen xd
 
 Una **pull request** es básicamente:
 
@@ -384,7 +397,7 @@ Sirve para:
 
 ---
 
-# Conflictos: el boss fight
+# Conflictos: el boss final
 
 ## Cuándo pasa
 
@@ -407,6 +420,7 @@ Tenés que editar ese archivo y decidir:
 * dejar tu versión
 * dejar la del otro
 * combinar ambas
+ATENCION: suele ser un bardo lo que te muestra git en los conflictos. Que conviene? abrir ambos codigos y chequear. Es un plomo realmente pero bueno, c'est la vie.
 
 Después:
 
@@ -425,16 +439,16 @@ Git solamente no puede leer la mente de los integrantes del grupo.
 
 # Guía ultra corta de supervivencia
 
-## Flujo normal si trabajás solo en una tarea
+## Flujo normal si trabajás solo en una tarea en branch
 
 ```bash
 git pull
-git switch -c nombre-de-mi-rama
+git switch -c nombre-de-mi-rama 
 # editás cosas
 git status
 git add .
 git commit -m "Describe tu cambio"
-git push -u origin nombre-de-mi-rama
+git push -u origin nombre-de-mi-rama 
 ```
 
 Después hacés el pull request.
@@ -555,7 +569,8 @@ No necesariamente. Git guarda historial si hiciste commit.
 ## “¿Puedo romper todo?”
 
 Sí.
-Pero menos de lo que pensás, y muchas veces se arregla.
+Pero menos de lo que pensás, y muchas veces se arregla. 
+NO SIGNIFICA QUE PUEDAN TOQUETEAR COMO SI NADA
 
 ## “¿Tengo que saber terminal sí o sí?”
 
@@ -571,16 +586,10 @@ github-para-petes/
 ├── README.md
 ├── .gitignore
 ├── presentaciones/
-│   ├── gonza.md
-│   ├── juan.md
-│   └── maria.md
-├── misiones/
-│   ├── 01-clone-y-status.md
-│   ├── 02-add-y-commit.md
-│   ├── 03-push-y-pull.md
-│   ├── 04-branches.md
-│   └── 05-conflictos.md
-└── desafios/
+│   ├── emi.md
+│   ├── matiDS.md
+│   └── rochi.md
+└── tarea/
     ├── ranking-de-materias.md
     └── archivo-conflictivo.md
 ```
