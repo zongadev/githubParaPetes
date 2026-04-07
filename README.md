@@ -9,7 +9,7 @@ Este repo está pensado para gente de la facultad que:
 * no sabe qué hace `git pull`
 * le tiene miedo a la terminal
 * sube un `.zip` al grupo en vez de hacer commit
-* piensa que **merge** es una materia de economía
+* piensa que **merge** es una marca de ropa
 
 La idea es aprender **haciendo**, con ejemplos simples, mini misiones y un poco de humor.
 
