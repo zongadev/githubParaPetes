@@ -212,7 +212,8 @@ Tener el repo en tu compu.
 
 Bien, arrancamos basicon basicon.
 Que es clonar? Bascimanete es
-> Traeme todo lo que esta en GitHub a mi compu
+> Traeme todo lo que esta en GitHub a mi compu.
+
 No solamente trae archivos sino informacion acerca del repositorio y demas boludeces.
 Para clonar, lo que haces es copiar la URL del repositorio (o apretar el boton verde y copiar ahi) y en tu consola, parado donde queres que se haga la CARPETA del repositorio ejecutas
 ```git clone URL_DEL_REPO```. 
