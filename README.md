@@ -60,7 +60,7 @@ Explica qué hay que instalar y cómo abrir Git Bash o la terminal.
 
 Aprendés `git clone` y qué pasa cuando bajás un repo.
 
-## 2. El santo trío
+## 2. La santisima trinidad
 
 Aprendés:
 
