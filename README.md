@@ -119,7 +119,7 @@ Ahora hay que setear la ssh. Que es ssh: video de [que es ssh en 27 segundos:]( 
 
 Arrancamos con:
 ```
-git config --global user.name "Tu Nombre"
+git config --global user.name "Tu usuario de git"
 git config --global user.email "tu_email@ejemplo.com"
 ```
 Generas una clave SSH asociada a tu correo, para esto es importante saber en donde estamos parados pq va a generar un archivo:
