@@ -515,28 +515,6 @@ __pycache__/
 
 ---
 
-# Ejercicio práctico grupal
-
-## Ronda 1
-
-Cada integrante crea su archivo en `presentaciones/`.
-
-Objetivo: practicar clone, add, commit y push.
-
-## Ronda 2
-
-Cada integrante crea una branch y agrega una línea a `ranking-de-materias.md`.
-
-Objetivo: practicar branches y pull requests.
-
-## Ronda 3
-
-Dos personas editan exactamente la misma línea.
-
-Objetivo: ver un conflicto real y resolverlo sin entrar en llanto técnico.
-
----
-
 # Cheat sheet del bien
 
 ```bash
